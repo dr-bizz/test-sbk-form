@@ -1,0 +1,58 @@
+name: Weekly Form Ping
+
+on:
+  schedule:
+    - cron: '0 14 * * 1'  # Mondays at 14:00 UTC
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  form-ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Create test results directory
+        run: mkdir -p test-results
+
+      - name: Run form ping test
+        env:
+          FORM_URL: ${{ secrets.FORM_URL }}
+          NAME_SELECTOR: ${{ secrets.NAME_SELECTOR }}
+          EMAIL_SELECTOR: ${{ secrets.EMAIL_SELECTOR }}
+          MESSAGE_SELECTOR: ${{ secrets.MESSAGE_SELECTOR }}
+          SUBMIT_SELECTOR: ${{ secrets.SUBMIT_SELECTOR }}
+          SUCCESS_REGEX: ${{ secrets.SUCCESS_REGEX }}
+        run: npx playwright test ping.spec.ts
+
+      - name: Upload test artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ github.run_number }}
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 7
+
+      - name: Upload success artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: success-results-${{ github.run_number }}
+          path: test-results/success.png
+          retention-days: 3

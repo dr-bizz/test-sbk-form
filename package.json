@@ -1,0 +1,14 @@
+{
+  "name": "form-ping",
+  "version": "1.0.0",
+  "description": "Weekly form ping using Playwright",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
