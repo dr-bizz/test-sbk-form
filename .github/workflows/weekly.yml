@@ -10,6 +10,8 @@ jobs:
     name: "🤖 Synthetic Test"
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      issues: write
     
     steps:
       - name: Checkout code
