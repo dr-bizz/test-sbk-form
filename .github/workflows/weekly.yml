@@ -29,12 +29,12 @@ jobs:
 
       - name: Run form ping test
         env:
-          FORM_URL: ${{ secrets.FORM_URL }}
-          NAME_SELECTOR: ${{ secrets.NAME_SELECTOR }}
-          EMAIL_SELECTOR: ${{ secrets.EMAIL_SELECTOR }}
-          MESSAGE_SELECTOR: ${{ secrets.MESSAGE_SELECTOR }}
-          SUBMIT_SELECTOR: ${{ secrets.SUBMIT_SELECTOR }}
-          SUCCESS_REGEX: ${{ secrets.SUCCESS_REGEX }}
+          FORM_URL: ${{ vars.FORM_URL }}
+          NAME_SELECTOR: ${{ vars.NAME_SELECTOR }}
+          EMAIL_SELECTOR: ${{ vars.EMAIL_SELECTOR }}
+          MESSAGE_SELECTOR: ${{ vars.MESSAGE_SELECTOR }}
+          SUBMIT_SELECTOR: ${{ vars.SUBMIT_SELECTOR }}
+          SUCCESS_REGEX: ${{ vars.SUCCESS_REGEX }}
         run: yarn synthetic-test
 
       - name: Create issue on failure
