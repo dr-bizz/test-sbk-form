@@ -15,12 +15,12 @@ export class FormPinger {
 
   constructor(config: PingConfig = {}) {
     this.config = {
-      formUrl: config.formUrl || process.env.FORM_URL || 'https://southbrook-tech.com/synthetic-test/',
-      nameSelector: config.nameSelector || process.env.NAME_SELECTOR || 'input[name="acf[field_68b77d4b373eb]"]',
-      emailSelector: config.emailSelector || process.env.EMAIL_SELECTOR || 'input[name="acf[field_68b77d4b37428]"]',
-      messageSelector: config.messageSelector || process.env.MESSAGE_SELECTOR || 'textarea[name="acf[field_68b77d4b37499]"]',
-      submitSelector: config.submitSelector || process.env.SUBMIT_SELECTOR || 'button[type="submit"]',
-      successRegex: config.successRegex || process.env.SUCCESS_REGEX || 'Successfully submitted.'
+      formUrl: config.formUrl || process.env.FORM_URL|| '',
+      nameSelector: config.nameSelector || process.env.NAME_SELECTOR|| '',
+      emailSelector: config.emailSelector || process.env.EMAIL_SELECTOR|| '',
+      messageSelector: config.messageSelector || process.env.MESSAGE_SELECTOR|| '',
+      submitSelector: config.submitSelector || process.env.SUBMIT_SELECTOR|| '',
+      successRegex: config.successRegex || process.env.SUCCESS_REGEX || ''
     };
   }
 
